@@ -1,31 +1,20 @@
 import { Box, ScrollView } from 'native-base';
-import { SafeAreaView } from 'react-native-safe-area-context';
 
 import { Card } from '../components/card';
+import { Container } from '../components/container';
+import { Header } from '../components/header';
 
 export const Home = () => {
   return (
-    <SafeAreaView style={{ flex: 1 }}>
-      <ScrollView px={6} my={4} flex={1}>
-        <Box mb={3}>
-          <Card type={1} />
-        </Box>
-        <Box mb={3}>
-          <Card type={2} />
-        </Box>
-        <Box mb={3}>
-          <Card type={3} />
-        </Box>
-        <Box mb={3}>
-          <Card type={4} />
-        </Box>
-        <Box mb={3}>
-          <Card type={5} />
-        </Box>
-        <Box>
-          <Card type={6} />
-        </Box>
+    <Container>
+      <Header title="Wallet" />
+      <ScrollView px={8} flex={1} contentContainerStyle={{ paddingTop: 20 }}>
+        {[1, 2, 3, 4, 5, 6].map(item => (
+          <Box key={item} mb={6}>
+            <Card type={item} />
+          </Box>
+        ))}
       </ScrollView>
-    </SafeAreaView>
+    </Container>
   );
 };
