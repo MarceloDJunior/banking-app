@@ -10,7 +10,7 @@ export const Header = ({ title }: Props) => {
   return (
     <>
       <HStack
-        py={4}
+        height={52}
         bg={colors.blue[500]}
         alignItems="center"
         justifyContent="center"

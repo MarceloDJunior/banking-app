@@ -1,10 +1,17 @@
 import { AspectRatio, Heading, HStack, Text, VStack } from 'native-base';
+import { useState } from 'react';
+import { Animated, Dimensions } from 'react-native';
 
-type CardProps = {
+type Card = {
   type: number;
   number: string;
   name: string;
   expiry: string;
+};
+
+type Props = Card & {
+  index: number;
+  y: Animated.Value;
 };
 
 const getColors = (type: number): string[] => {
@@ -24,11 +31,58 @@ const getColors = (type: number): string[] => {
   }
 };
 
-export const Card = ({ type, number, name, expiry }: CardProps) => {
+const AnimatedAspectRatio = Animated.createAnimatedComponent(AspectRatio);
+
+const height = Dimensions.get('window').height - 52;
+
+export const Card = ({ type, number, name, expiry, y, index }: Props) => {
   const maskedNumber = `•••• •••• •••• ${number.slice(-4)}`;
+  const [cardHeight, setCardHeight] = useState(0);
+
+  const position = Animated.subtract(index * cardHeight, y);
+  const isDisappearing = -cardHeight;
+  const isTop = 0;
+  const isBottom = height - cardHeight;
+  const isAppearing = height;
+  const translateY = Animated.add(
+    Animated.add(
+      y,
+      y.interpolate({
+        inputRange: [0, 0.1 + index * cardHeight],
+        outputRange: [0, -index * cardHeight],
+        extrapolateRight: 'clamp',
+      })
+    ),
+    position.interpolate({
+      inputRange: [isBottom, isAppearing],
+      outputRange: [0, -cardHeight / 4],
+      extrapolate: 'clamp',
+    })
+  );
+  const scale = position.interpolate({
+    inputRange: [isDisappearing, isTop, isBottom, isAppearing],
+    outputRange: [0.5, 1, 1, 0.5],
+    extrapolate: 'clamp',
+  });
+  const opacity = position.interpolate({
+    inputRange: [isDisappearing, isTop, isBottom, isAppearing],
+    outputRange: [0.5, 1, 1, 0.5],
+  });
 
   return (
-    <AspectRatio p={4} borderRadius={8} ratio={16 / 9} width="full">
+    <AnimatedAspectRatio
+      borderRadius={8}
+      ratio={16 / 10}
+      width="full"
+      onLayout={({ nativeEvent }) =>
+        setCardHeight(nativeEvent.layout.height + 30)
+      }
+      style={{
+        opacity,
+        transform: [{ translateY, scale }],
+        padding: 20,
+      }}
+    >
       <VStack
         py={4}
         px={6}
@@ -59,6 +113,6 @@ export const Card = ({ type, number, name, expiry }: CardProps) => {
           </VStack>
         </HStack>
       </VStack>
-    </AspectRatio>
+    </AnimatedAspectRatio>
   );
 };
