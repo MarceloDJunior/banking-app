@@ -2,6 +2,9 @@ import { AspectRatio, Heading, HStack, Text, VStack } from 'native-base';
 
 type CardProps = {
   type: number;
+  number: string;
+  name: string;
+  expiry: string;
 };
 
 const getColors = (type: number): string[] => {
@@ -21,7 +24,9 @@ const getColors = (type: number): string[] => {
   }
 };
 
-export const Card = ({ type }: CardProps) => {
+export const Card = ({ type, number, name, expiry }: CardProps) => {
+  const maskedNumber = `•••• •••• •••• ${number.slice(-4)}`;
+
   return (
     <AspectRatio p={4} borderRadius={8} ratio={16 / 9} width="full">
       <VStack
@@ -37,20 +42,20 @@ export const Card = ({ type }: CardProps) => {
         }}
       >
         <HStack flex={2} alignItems="center">
-          <Heading color="white">**** **** **** 1234</Heading>
+          <Heading color="white">{maskedNumber}</Heading>
         </HStack>
         <HStack flex={1} alignItems="center" justify-content="space-between">
           <VStack flex={1}>
             <Text color="white" fontSize={10}>
               Card holder name
             </Text>
-            <Text color="white">Marcelo D Junior</Text>
+            <Text color="white">{name}</Text>
           </VStack>
           <VStack flex={1}>
             <Text color="white" fontSize={10}>
               Expiration date
             </Text>
-            <Text color="white">10/30</Text>
+            <Text color="white">{expiry}</Text>
           </VStack>
         </HStack>
       </VStack>
