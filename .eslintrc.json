@@ -26,6 +26,10 @@
       "error",
       "always"
     ],
+    "react/jsx-curly-brace-presence": [
+      "error",
+      "never"
+    ],
     "import/order": [
       "error",
       {
