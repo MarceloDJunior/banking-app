@@ -30,6 +30,11 @@
       "error",
       "never"
     ],
+    "react-native/no-inline-styles": "off",
+    "arrow-parens": [
+      "error",
+      "as-needed"
+    ],
     "import/order": [
       "error",
       {
