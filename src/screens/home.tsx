@@ -3,7 +3,7 @@ import { Animated } from 'react-native';
 
 import { Card } from '../components/card';
 import { Container } from '../components/container';
-import { Header } from '../components/header';
+import { StickyHeader } from '../components/sticky-header';
 import { CARDS } from '../constants/cards';
 
 const AnimatedFlatList: typeof FlatList =
@@ -28,16 +28,25 @@ export const Home = () => {
 
   return (
     <Container>
-      <Header title="Wallet" />
       <AnimatedFlatList
+        ListHeaderComponent={<StickyHeader title="Wallet" yPosition={y} />}
+        ListHeaderComponentStyle={{
+          marginBottom: 10,
+        }}
+        contentInset={{
+          top: 0,
+          bottom: 240,
+        }}
+        stickyHeaderHiddenOnScroll={false}
+        stickyHeaderIndices={[0]}
         scrollEventThrottle={16}
-        px={8}
+        showsVerticalScrollIndicator={false}
+        bounces={false}
         flex={1}
-        contentContainerStyle={{ paddingTop: 20 }}
         data={CARDS}
         keyExtractor={item => item.id.toString()}
         renderItem={({ index, item }) => (
-          <Box mb={6}>
+          <Box mb={6} px={6}>
             <Card type={item.id} index={index} y={y} {...item} />
           </Box>
         )}

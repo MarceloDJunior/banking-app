@@ -75,7 +75,7 @@ export const Card = ({ type, number, name, expiry, y, index }: Props) => {
       ratio={16 / 10}
       width="full"
       onLayout={({ nativeEvent }) =>
-        setCardHeight(nativeEvent.layout.height + 30)
+        setCardHeight(nativeEvent.layout.height + 25)
       }
       style={{
         opacity,
