@@ -29,6 +29,7 @@ export const Home = () => {
   return (
     <Container>
       <AnimatedFlatList
+        bg="coolGray.100"
         ListHeaderComponent={<StickyHeader title="Wallet" yPosition={y} />}
         ListHeaderComponentStyle={{
           marginBottom: 10,

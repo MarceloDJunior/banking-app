@@ -112,7 +112,7 @@ export const StickyHeader = ({ title, yPosition }: Props) => {
 
   return (
     <>
-      <AnimatedBox bg="blue.500" style={animatedBoxStyles}>
+      <AnimatedBox bg="darkBlue.700" style={animatedBoxStyles}>
         <AnimatedHeading
           color="white"
           textAlign="center"
@@ -149,8 +149,12 @@ export const StickyHeader = ({ title, yPosition }: Props) => {
           </VStack>
         </AnimatedBox>
       </AnimatedBox>
-      <Box bg="blue.500">
-        <AnimatedBox bg="white" height={10} style={animatedBorderedBoxStyles} />
+      <Box bg="darkBlue.700">
+        <AnimatedBox
+          bg="coolGray.100"
+          height={10}
+          style={animatedBorderedBoxStyles}
+        />
       </Box>
     </>
   );

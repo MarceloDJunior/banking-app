@@ -10,7 +10,7 @@ export const Container = ({ children }: Props) => {
   const { colors } = useTheme();
 
   return (
-    <View bg={colors.blue[500]} flex={1}>
+    <View bg={colors.darkBlue[700]} flex={1}>
       <StatusBar style="light" />
       <SafeAreaView style={{ flex: 1 }} edges={['top']}>
         <View bg="white" flex={1}>
