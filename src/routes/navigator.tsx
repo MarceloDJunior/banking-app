@@ -6,6 +6,7 @@ import {
 } from 'phosphor-react-native';
 
 import { Home } from '../screens/home';
+import { Cards } from '../screens/cards';
 
 const Tab = createBottomTabNavigator();
 
@@ -13,7 +14,7 @@ export const Navigator = () => {
   const { colors } = useTheme();
 
   const renderIcons = (route: string, focused: boolean) => {
-    const color = focused ? colors.blue[600] : colors.gray[300];
+    const color = focused ? colors.primary[500] : colors.gray[300];
 
     switch (route) {
       case 'Home':
@@ -29,13 +30,13 @@ export const Navigator = () => {
     <Tab.Navigator
       screenOptions={({ route }) => ({
         headerShown: false,
-        tabBarActiveTintColor: colors.blue[600],
+        tabBarActiveTintColor: colors.primary[500],
         tabBarInactiveTintColor: colors.gray[300],
         tabBarIcon: ({ focused }) => renderIcons(route.name, focused),
       })}
     >
       <Tab.Screen name="Home" component={Home} />
-      <Tab.Screen name="Cards" component={Home} />
+      <Tab.Screen name="Cards" component={Cards} />
     </Tab.Navigator>
   );
 };
