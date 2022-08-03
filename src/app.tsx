@@ -4,6 +4,7 @@ import { NativeBaseProvider } from 'native-base';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 
 import { Navigator } from './routes/navigator';
+import { THEME } from './styles/theme';
 
 const config = {
   dependencies: {
@@ -13,7 +14,7 @@ const config = {
 
 export default function App() {
   return (
-    <NativeBaseProvider config={config}>
+    <NativeBaseProvider config={config} theme={THEME}>
       <SafeAreaProvider>
         <NavigationContainer>
           <Navigator />
