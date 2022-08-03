@@ -1,8 +1,9 @@
+import { NavigationContainer } from '@react-navigation/native';
 import { LinearGradient } from 'expo-linear-gradient';
 import { NativeBaseProvider } from 'native-base';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 
-import { Home } from './screens/home';
+import { Navigator } from './routes/navigator';
 
 const config = {
   dependencies: {
@@ -14,7 +15,9 @@ export default function App() {
   return (
     <NativeBaseProvider config={config}>
       <SafeAreaProvider>
-        <Home />
+        <NavigationContainer>
+          <Navigator />
+        </NavigationContainer>
       </SafeAreaProvider>
     </NativeBaseProvider>
   );
