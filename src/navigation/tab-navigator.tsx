@@ -5,12 +5,13 @@ import {
   CreditCard as CardIcon,
 } from 'phosphor-react-native';
 
-import { Home } from '../screens/home';
+import { Drawer3dContainer } from '../components/drawer-3d-container';
 import { Cards } from '../screens/cards';
+import { Home } from '../screens/home';
 
 const Tab = createBottomTabNavigator();
 
-export const Navigator = () => {
+export const TabNavigator = () => {
   const { colors } = useTheme();
 
   const renderIcons = (route: string, focused: boolean) => {
@@ -27,16 +28,18 @@ export const Navigator = () => {
   };
 
   return (
-    <Tab.Navigator
-      screenOptions={({ route }) => ({
-        headerShown: false,
-        tabBarActiveTintColor: colors.primary[500],
-        tabBarInactiveTintColor: colors.gray[300],
-        tabBarIcon: ({ focused }) => renderIcons(route.name, focused),
-      })}
-    >
-      <Tab.Screen name="Home" component={Home} />
-      <Tab.Screen name="Cards" component={Cards} />
-    </Tab.Navigator>
+    <Drawer3dContainer>
+      <Tab.Navigator
+        screenOptions={({ route }) => ({
+          headerShown: false,
+          tabBarActiveTintColor: colors.primary[500],
+          tabBarInactiveTintColor: colors.gray[300],
+          tabBarIcon: ({ focused }) => renderIcons(route.name, focused),
+        })}
+      >
+        <Tab.Screen name="Home" component={Home} />
+        <Tab.Screen name="Cards" component={Cards} />
+      </Tab.Navigator>
+    </Drawer3dContainer>
   );
 };
