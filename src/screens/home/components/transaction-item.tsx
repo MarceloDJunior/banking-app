@@ -1,4 +1,4 @@
-import { Box, HStack, Text, VStack } from 'native-base';
+import { Box, HStack, Text, useTheme, VStack } from 'native-base';
 
 import { TransactionModel } from '../../../models/transaction-model';
 
@@ -7,16 +7,18 @@ type Props = {
 };
 
 export const TransactionItem = ({ transaction }: Props) => {
+  const { colors } = useTheme();
+
   return (
     <HStack alignItems="center" py={2}>
       <Box
         style={{ width: 60, height: 60 }}
-        bg="gray.100"
+        bg={colors.gray[100]}
         rounded="full"
         p={1}
         mr={2}
       >
-        <Box size="full" bg="gray.200" rounded="full" />
+        <Box size="full" bg={colors.gray[200]} rounded="full" />
       </Box>
       <VStack>
         <HStack>
@@ -27,13 +29,13 @@ export const TransactionItem = ({ transaction }: Props) => {
             fontSize="sm"
             textTransform="capitalize"
             fontWeight="bold"
-            color="blue.500"
+            color={colors.primary[600]}
           >
             &nbsp;
             {transaction.type === 'receive' ? transaction.from : transaction.to}
           </Text>
         </HStack>
-        <Text fontSize="xs" color="gray.500" mt={1}>
+        <Text fontSize="xs" color={colors.gray[500]} mt={1}>
           {transaction.date.toLocaleString('en-US')}
         </Text>
       </VStack>
