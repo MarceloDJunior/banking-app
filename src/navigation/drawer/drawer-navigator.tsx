@@ -4,14 +4,18 @@ import {
   DrawerContentComponentProps,
 } from '@react-navigation/drawer';
 import { useTheme } from 'native-base';
-import {
-  House as HouseIcon,
-  CreditCard as CardIcon,
-} from 'phosphor-react-native';
+import { House as HouseIcon } from 'phosphor-react-native';
+import { ParamListBase, RouteProp } from '@react-navigation/native';
 
-import { DrawerContent } from '../components/drawer-content';
+import { TabNavigator } from '../bottom-tabs/bottom-tabs-navigator';
 
-import { TabNavigator } from './tab-navigator';
+import { DrawerContent } from './components/drawer-content';
+import { Drawer3dContainer } from './components/drawer-3d-container';
+
+type DrawerNavigatorProps = {
+  route: RouteProp<ParamListBase, any>;
+  navigation: any;
+};
 
 const Drawer = createDrawerNavigator();
 
@@ -26,14 +30,20 @@ export const DrawerNavigator = () => {
 
   const renderIcons = (route: string) => {
     switch (route) {
-      case 'Home':
+      case 'HomeTabs':
         return <HouseIcon color={colors.white} />;
-      case 'Cards':
-        return <CardIcon color={colors.white} />;
       default:
         return null;
     }
   };
+
+  const renderScreen = useCallback((props: DrawerNavigatorProps) => {
+    return (
+      <Drawer3dContainer {...props}>
+        <TabNavigator />
+      </Drawer3dContainer>
+    );
+  }, []);
 
   return (
     <Drawer.Navigator
@@ -55,8 +65,9 @@ export const DrawerNavigator = () => {
         swipeEnabled: false,
       })}
     >
-      <Drawer.Screen name="Home" component={TabNavigator} />
-      <Drawer.Screen name="Cards" component={TabNavigator} />
+      <Drawer.Screen name="HomeTabs" options={{ title: 'Home' }}>
+        {renderScreen}
+      </Drawer.Screen>
     </Drawer.Navigator>
   );
 };

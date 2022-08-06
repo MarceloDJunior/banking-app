@@ -35,6 +35,7 @@
       "error",
       "as-needed"
     ],
+    "@typescript-eslint/no-explicit-any": "off",
     "import/order": [
       "error",
       {
