@@ -1,0 +1,4 @@
+Add animation to bottom bar
+Implement fixed header and footer that hide on scroll
+Style footer borders in iphonex
+Add animation to cards screen

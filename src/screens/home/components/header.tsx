@@ -12,7 +12,7 @@ export const Header = () => {
   };
 
   return (
-    <HStack px={4} py={4} justifyContent="space-between" alignItems="center">
+    <HStack px={4} py={3} justifyContent="space-between" alignItems="center">
       <HStack flex={1} justifyContent="flex-start">
         <MenuButton onPress={openDrawer} />
       </HStack>
