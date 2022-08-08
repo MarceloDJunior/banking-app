@@ -13,7 +13,7 @@ type Props = {
 
 export const BottomTabItem = ({ isCurrent, label, route }: Props) => {
   const { colors } = useTheme();
-  const color = isCurrent ? colors.white : colors.gray[500];
+  const color = isCurrent ? colors.primary[500] : colors.gray[500];
 
   const renderIcon = () => {
     switch (route) {

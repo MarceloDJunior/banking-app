@@ -5,11 +5,10 @@ import Animated, {
   useSharedValue,
   withSpring,
 } from 'react-native-reanimated';
-import { AspectRatio, useTheme } from 'native-base';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import { useTheme } from 'native-base';
 import { useCallback } from 'react';
 import { Route } from '@react-navigation/native';
-
-import { Hexagon } from '../../../components/hexagon';
 
 import { BottomTabItem } from './bottom-tab-item';
 
@@ -18,8 +17,9 @@ export const TabBar = ({
   descriptors,
   navigation,
 }: BottomTabBarProps) => {
+  const { bottom } = useSafeAreaInsets();
   const { colors } = useTheme();
-  const totalWidth = Dimensions.get('window').width - 16;
+  const totalWidth = Dimensions.get('window').width;
   const tabWidth = totalWidth / state.routes.length;
   const translateX = useSharedValue(tabWidth * state.index);
 
@@ -79,17 +79,18 @@ export const TabBar = ({
   const themedStyles = styles(colors);
 
   return (
-    <View style={[themedStyles.container]}>
+    <View
+      style={[
+        themedStyles.container,
+        {
+          paddingBottom: bottom,
+          height: bottom + 60,
+        },
+      ]}
+    >
       <View style={{ flexDirection: 'row' }}>
         <Animated.View style={[themedStyles.activeTab, activeTabStyles]}>
-          <AspectRatio
-            height="full"
-            ratio={1}
-            alignItems="center"
-            justifyContent="center"
-          >
-            <Hexagon color={colors.primary[500]} size={55} />
-          </AspectRatio>
+          <View style={themedStyles.slider} />
         </Animated.View>
         {state.routes.map((route, index) => {
           const { options } = descriptors[route.key];
@@ -103,6 +104,7 @@ export const TabBar = ({
               onPress={() => onTabPress(route, index, isFocused)}
               onLongPress={() => onTabLongPress(route)}
               style={{ flex: 1 }}
+              activeOpacity={0.7}
               key={index}
             >
               <BottomTabItem
@@ -127,18 +129,14 @@ const styles = (colors: any) =>
       shadowOpacity: 0.1,
       shadowRadius: 4.0,
       position: 'absolute',
-      bottom: 8,
-      left: 8,
-      right: 8,
+      bottom: 0,
+      left: 0,
+      right: 0,
       borderTopWidth: 0,
       backgroundColor: colors.white,
       elevation: 30,
       zIndex: 1,
       height: 60,
-      borderTopLeftRadius: 30,
-      borderTopRightRadius: 30,
-      borderBottomLeftRadius: 30,
-      borderBottomRightRadius: 30,
     },
     activeTab: {
       height: '100%',
@@ -148,7 +146,14 @@ const styles = (colors: any) =>
       borderRadius: 10,
       width: 50,
       alignItems: 'center',
-      justifyContent: 'center',
+      justifyContent: 'flex-start',
       padding: 2,
+    },
+    slider: {
+      width: '70%',
+      height: 4,
+      borderRadius: 2,
+      backgroundColor: colors.primary[500],
+      position: 'absolute',
     },
   });

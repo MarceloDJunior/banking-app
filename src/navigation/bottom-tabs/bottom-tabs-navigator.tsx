@@ -3,6 +3,7 @@ import {
   createBottomTabNavigator,
 } from '@react-navigation/bottom-tabs';
 import { useCallback } from 'react';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 import { Cards } from '../../screens/cards';
 import { Home } from '../../screens/home';
@@ -12,6 +13,7 @@ import { TabBar } from './components/tab-bar';
 const Tab = createBottomTabNavigator();
 
 export const TabNavigator = () => {
+  const { bottom } = useSafeAreaInsets();
   const renderTabBar = useCallback(
     (props: BottomTabBarProps) => <TabBar {...props} />,
     []
@@ -26,7 +28,7 @@ export const TabNavigator = () => {
         tabBarShowLabel: false,
       })}
       sceneContainerStyle={{
-        paddingBottom: 60,
+        paddingBottom: 60 + bottom,
       }}
     >
       <Tab.Screen name="Cards" component={Cards} />
