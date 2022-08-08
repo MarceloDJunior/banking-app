@@ -15,7 +15,7 @@ export const Container = ({ children }: Props) => {
     <View bg={colors.white} flex={1}>
       <StatusBar style={drawerStatus === 'open' ? 'light' : 'dark'} />
       <SafeAreaView style={{ flex: 1 }} edges={['top']}>
-        <View bg="white" flex={1}>
+        <View bg="white" flex={1} overflow="hidden">
           {children}
         </View>
       </SafeAreaView>

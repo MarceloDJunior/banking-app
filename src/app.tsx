@@ -2,6 +2,7 @@ import { LinearGradient } from 'expo-linear-gradient';
 import { NativeBaseProvider } from 'native-base';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 
+import { StickyScrollProvider } from './contexts/sticky-scroll-context';
 import { Navigator } from './navigation';
 import { THEME } from './styles/theme';
 
@@ -15,7 +16,9 @@ export default function App() {
   return (
     <NativeBaseProvider config={config} theme={THEME}>
       <SafeAreaProvider>
-        <Navigator />
+        <StickyScrollProvider>
+          <Navigator />
+        </StickyScrollProvider>
       </SafeAreaProvider>
     </NativeBaseProvider>
   );

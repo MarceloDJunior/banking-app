@@ -4,11 +4,14 @@ import Animated, {
   useAnimatedStyle,
   useSharedValue,
   withSpring,
+  withTiming,
 } from 'react-native-reanimated';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { useTheme } from 'native-base';
 import { useCallback } from 'react';
 import { Route } from '@react-navigation/native';
+
+import { useStickyScrollContext } from '../../../contexts/sticky-scroll-context';
 
 import { BottomTabItem } from './bottom-tab-item';
 
@@ -19,23 +22,10 @@ export const TabBar = ({
 }: BottomTabBarProps) => {
   const { bottom } = useSafeAreaInsets();
   const { colors } = useTheme();
+  const { isScrollingDown } = useStickyScrollContext();
   const totalWidth = Dimensions.get('window').width;
   const tabWidth = totalWidth / state.routes.length;
   const translateX = useSharedValue(tabWidth * state.index);
-
-  const activeTabStyles = useAnimatedStyle(() => {
-    return {
-      width: tabWidth - 20,
-      transform: [
-        {
-          translateX: withSpring(translateX.value, {
-            stiffness: 70,
-            velocity: 20,
-          }),
-        },
-      ],
-    };
-  });
 
   const onTabPress = useCallback(
     (route: Route<any>, index: number, isFocused: boolean) => {
@@ -78,18 +68,38 @@ export const TabBar = ({
 
   const themedStyles = styles(colors);
 
-  return (
-    <View
-      style={[
-        themedStyles.container,
+  const activeTabAnimatedStyles = useAnimatedStyle(() => {
+    return {
+      width: tabWidth - 20,
+      transform: [
         {
-          paddingBottom: bottom,
-          height: bottom + 60,
+          translateX: withSpring(translateX.value, {
+            stiffness: 160,
+            damping: 14,
+            velocity: 90,
+          }),
         },
-      ]}
-    >
+      ],
+    };
+  });
+
+  const containerAnimatedStyles = useAnimatedStyle(() => {
+    const height = isScrollingDown ? 0 : bottom + 60;
+    const paddingBottom = isScrollingDown ? 0 : bottom;
+    const bottomPos = isScrollingDown ? -60 : 0;
+    return {
+      height: withTiming(height, { duration: 200 }),
+      paddingBottom: withTiming(paddingBottom, { duration: 200 }),
+      bottom: withTiming(bottomPos, { duration: 200 }),
+    };
+  });
+
+  return (
+    <Animated.View style={[themedStyles.container, containerAnimatedStyles]}>
       <View style={{ flexDirection: 'row' }}>
-        <Animated.View style={[themedStyles.activeTab, activeTabStyles]}>
+        <Animated.View
+          style={[themedStyles.activeTab, activeTabAnimatedStyles]}
+        >
           <View style={themedStyles.slider} />
         </Animated.View>
         {state.routes.map((route, index) => {
@@ -116,7 +126,7 @@ export const TabBar = ({
           );
         })}
       </View>
-    </View>
+    </Animated.View>
   );
 };
 const styles = (colors: any) =>
