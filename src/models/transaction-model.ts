@@ -1,8 +1,8 @@
 export type TransactionModel = {
   id: number;
-  type: 'send' | 'receive';
-  from?: string;
-  to?: string;
+  type: 'pay' | 'receive';
+  title: string;
+  icon: string;
   amount: number;
   date: Date;
 };

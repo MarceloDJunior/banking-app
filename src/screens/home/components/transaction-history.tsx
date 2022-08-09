@@ -1,5 +1,4 @@
-import { Heading, HStack, useTheme, VStack } from 'native-base';
-import { CaretRight } from 'phosphor-react-native';
+import { Button, Heading, HStack, VStack } from 'native-base';
 
 import { TransactionModel } from '../../../models/transaction-model';
 
@@ -8,35 +7,54 @@ import { TransactionItem } from './transaction-item';
 const TRANSACTIONS: TransactionModel[] = [
   {
     id: 1,
-    type: 'receive',
-    from: 'Paul M.',
-    amount: 100,
+    title: 'Netflix',
+    type: 'pay',
+    amount: 40,
+    icon: 'netflix',
     date: new Date(),
   },
   {
     id: 2,
-    type: 'send',
-    to: 'John D.',
-    amount: 200,
+    title: 'Amazon',
+    type: 'pay',
+    amount: 300,
+    icon: 'amazon',
     date: new Date(),
   },
   {
     id: 3,
-    type: 'receive',
-    from: 'Jane S.',
-    amount: 136,
+    title: 'Uber',
+    type: 'pay',
+    amount: 45,
+    icon: 'uber',
+    date: new Date(),
+  },
+  {
+    id: 4,
+    title: 'Spotify',
+    type: 'pay',
+    amount: 15,
+    icon: 'spotify',
     date: new Date(),
   },
 ];
 
 export const TransactionHistory = () => {
-  const { colors } = useTheme();
-
   return (
     <VStack px={4} py={6}>
       <HStack alignItems="center" justifyContent="space-between" mb={3}>
-        <Heading fontSize="md">Transaction History</Heading>
-        <CaretRight size={24} color={colors.gray[500]} />
+        <Heading fontSize="md">Recent transactions</Heading>
+        <Button
+          variant="ghost"
+          _text={{ fontWeight: 'bold', fontSize: 'xs' }}
+          _pressed={{
+            bg: 'transparent',
+            opacity: 0.7,
+          }}
+          p={0}
+        >
+          Show all
+        </Button>
       </HStack>
       <VStack>
         {TRANSACTIONS.map(transaction => (
