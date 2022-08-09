@@ -3,13 +3,8 @@ import {
   House as HouseIcon,
   CreditCard as CardIcon,
   Gear as SettingsIcon,
+  IconWeight,
 } from 'phosphor-react-native';
-import { useLayoutEffect } from 'react';
-import Animated, {
-  useAnimatedStyle,
-  useSharedValue,
-  withSpring,
-} from 'react-native-reanimated';
 
 type Props = {
   isCurrent: boolean;
@@ -17,53 +12,42 @@ type Props = {
   route: string;
 };
 
-const AnimatedVStack = Animated.createAnimatedComponent(VStack);
-
 export const BottomTabItem = ({ isCurrent, label, route }: Props) => {
   const { colors } = useTheme();
   const color = isCurrent ? colors.primary[500] : colors.gray[500];
-  const scale = useSharedValue(1);
 
   const renderIcon = () => {
+    const weight: IconWeight = isCurrent ? 'fill' : 'regular';
+    const props = {
+      color,
+      size: 24,
+      weight,
+    };
+
     switch (route) {
       case 'Cards':
-        return <CardIcon color={color} size={24} />;
+        return <CardIcon {...props} />;
       case 'Home':
-        return <HouseIcon color={color} size={24} />;
+        return <HouseIcon {...props} />;
       case 'Settings':
-        return <SettingsIcon color={color} size={24} />;
+        return <SettingsIcon {...props} />;
       default:
         return null;
     }
   };
 
-  useLayoutEffect(() => {
-    if (isCurrent) {
-      scale.value = 1.1;
-    } else {
-      scale.value = 1;
-    }
-  }, [isCurrent, scale]);
-
-  const animatedStyles = useAnimatedStyle(() => {
-    return {
-      transform: [{ scale: withSpring(scale.value) }],
-    };
-  });
-
   return (
-    <AnimatedVStack
+    <VStack
       w="full"
       alignItems="center"
       justifyContent="center"
       height="full"
       p={2}
-      style={animatedStyles}
     >
       {renderIcon()}
       <Text fontSize="2xs" color={color}>
         {label}
       </Text>
-    </AnimatedVStack>
+    </VStack>
   );
 };
