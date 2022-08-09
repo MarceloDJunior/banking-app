@@ -1,4 +1,6 @@
-export const CARDS = [
+import { CardModel } from '../models/card-model';
+
+export const CARDS: CardModel[] = [
   {
     id: 1,
     number: '123456789',

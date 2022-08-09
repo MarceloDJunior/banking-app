@@ -12,7 +12,11 @@ import { MenuButton } from './menu-button';
 
 const AnimatedHStack = Animated.createAnimatedComponent(HStack);
 
-export const Header = () => {
+type Props = {
+  title: string;
+};
+
+export const Header = ({ title }: Props) => {
   const { colors } = useTheme();
   const navigation = useNavigation();
   const { isScrollingDown } = useStickyScrollContext();
@@ -51,7 +55,7 @@ export const Header = () => {
         <MenuButton onPress={openDrawer} />
       </HStack>
       <Heading fontSize="lg" flex={1} textAlign="center">
-        My Wallet
+        {title}
       </Heading>
       <HStack flex={1} justifyContent="flex-end">
         <UserIcon size={30} />

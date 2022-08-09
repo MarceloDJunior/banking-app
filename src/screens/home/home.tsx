@@ -10,7 +10,7 @@ import { TransactionHistory } from './components/transaction-history';
 export const Home = () => {
   return (
     <Container>
-      <Header />
+      <Header title="Home" />
       <StickyScrollView>
         <Balance />
         <CardList />
