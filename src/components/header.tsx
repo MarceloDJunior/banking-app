@@ -1,6 +1,5 @@
 import { DrawerActions, useNavigation } from '@react-navigation/native';
 import { Heading, HStack, useTheme } from 'native-base';
-import { UserCircle as UserIcon } from 'phosphor-react-native';
 import Animated, {
   useAnimatedStyle,
   withTiming,
@@ -14,9 +13,10 @@ const AnimatedHStack = Animated.createAnimatedComponent(HStack);
 
 type Props = {
   title: string;
+  rightHeader?: React.ReactNode;
 };
 
-export const Header = ({ title }: Props) => {
+export const Header = ({ title, rightHeader }: Props) => {
   const { colors } = useTheme();
   const navigation = useNavigation();
   const { isScrollingDown } = useStickyScrollContext();
@@ -26,8 +26,9 @@ export const Header = ({ title }: Props) => {
   };
 
   const headerAnimatedStyles = useAnimatedStyle(() => {
-    const top = isScrollingDown ? -50 : 0;
+    const top = isScrollingDown ? -54 : 0;
     return {
+      height: 54,
       top: withTiming(top, { duration: 200 }),
       shadowOffset: {
         width: 0,
@@ -58,7 +59,7 @@ export const Header = ({ title }: Props) => {
         {title}
       </Heading>
       <HStack flex={1} justifyContent="flex-end">
-        <UserIcon size={30} />
+        {rightHeader}
       </HStack>
     </AnimatedHStack>
   );
