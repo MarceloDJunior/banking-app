@@ -10,7 +10,9 @@ export const Balance = () => {
       justifyContent="flex-start"
     >
       <VStack>
-        <Text fontSize="xs">Total balance</Text>
+        <Text fontSize="xs" fontWeight="bold">
+          Total balance
+        </Text>
         <HStack>
           <Text fontSize="3xl" fontWeight="bold">
             $2,340.00
