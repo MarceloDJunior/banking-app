@@ -1,10 +1,15 @@
 import { useCallback } from 'react';
+import { StyleProp, ViewStyle } from 'react-native';
 import {
   createDrawerNavigator,
   DrawerContentComponentProps,
 } from '@react-navigation/drawer';
 import { useTheme } from 'native-base';
-import { House as HouseIcon } from 'phosphor-react-native';
+import {
+  House as HouseIcon,
+  CreditCard as CardIcon,
+  Gear as SettingsIcon,
+} from 'phosphor-react-native';
 import { ParamListBase, RouteProp } from '@react-navigation/native';
 
 import { TabNavigator } from '../bottom-tabs/bottom-tabs-navigator';
@@ -29,9 +34,20 @@ export const DrawerNavigator = () => {
   );
 
   const renderIcons = (route: string) => {
+    const props = {
+      style: {
+        position: 'absolute',
+        left: 0,
+      } as StyleProp<ViewStyle>,
+    };
+
     switch (route) {
       case 'HomeTabs':
-        return <HouseIcon color={colors.white} />;
+        return <HouseIcon color={colors.white} {...props} />;
+      case 'CardsTabs':
+        return <CardIcon color={colors.white} {...props} />;
+      case 'SettingsTabs':
+        return <SettingsIcon color={colors.white} {...props} />;
       default:
         return null;
     }
@@ -58,6 +74,10 @@ export const DrawerNavigator = () => {
           paddingHorizontal: 8,
           backgroundColor: colors.primary[600],
         },
+        drawerItemStyle: {
+          backgroundColor: colors.primary[600],
+          marginLeft: 12,
+        },
         overlayColor: 'transparent',
         drawerActiveTintColor: colors.white,
         drawerInactiveTintColor: colors.white,
@@ -66,6 +86,12 @@ export const DrawerNavigator = () => {
       })}
     >
       <Drawer.Screen name="HomeTabs" options={{ title: 'Home' }}>
+        {renderScreen}
+      </Drawer.Screen>
+      <Drawer.Screen name="CardsTabs" options={{ title: 'Cards' }}>
+        {renderScreen}
+      </Drawer.Screen>
+      <Drawer.Screen name="SettingsTabs" options={{ title: 'Settings' }}>
         {renderScreen}
       </Drawer.Screen>
     </Drawer.Navigator>
