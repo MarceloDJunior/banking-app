@@ -56,7 +56,7 @@ export const Cards = () => {
         renderItem={({ index, item }) => (
           <Box mb={6} px={6}>
             <AnimatedCard index={index} scrollY={scrollY}>
-              <Card type={item.id} {...item} />
+              <Card {...item} />
             </AnimatedCard>
           </Box>
         )}
