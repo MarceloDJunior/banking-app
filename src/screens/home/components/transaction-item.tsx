@@ -1,9 +1,9 @@
 import { Box, HStack, Text, useTheme, VStack, Image } from 'native-base';
 
-import AmazonIcon from '../../../assets/amazon.jpeg';
-import NetflixIcon from '../../../assets/netflix.jpeg';
-import SpotifyIcon from '../../../assets/spotify.jpeg';
-import UberIcon from '../../../assets/uber.jpeg';
+import AmazonIcon from '../../../assets/images/amazon.jpeg';
+import NetflixIcon from '../../../assets/images/netflix.jpeg';
+import SpotifyIcon from '../../../assets/images/spotify.jpeg';
+import UberIcon from '../../../assets/images/uber.jpeg';
 import { TransactionModel } from '../../../models/transaction-model';
 
 type Props = {

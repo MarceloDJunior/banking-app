@@ -1,46 +1,49 @@
 import { AspectRatio, Heading, HStack, Text, VStack } from 'native-base';
 
-type Props = {
-  type: number;
-  number: string;
-  name: string;
-  expiry: string;
-};
+import VisaSVG from '../assets/svgs/visa.svg';
+import MastercardSVG from '../assets/svgs/mastercard.svg';
+import { CardModel } from '../models/card-model';
 
-const getColors = (type: number): string[] => {
-  switch (type) {
-    case 1:
-      return ['lightBlue.300', 'violet.800'];
-    case 2:
-      return ['red.400', 'cyan.600'];
-    case 3:
-      return ['purple.400', 'orange.400'];
-    case 4:
-      return ['primary.500', 'secondary.800'];
-    case 5:
-      return ['tertiary.300', 'dark.300'];
-    default:
-      return ['gray.700', 'gray.900'];
-  }
-};
+type Props = CardModel;
 
-export const Card = ({ type, number, name, expiry }: Props) => {
+export const Card = ({ brand, color, expiry, name, number, type }: Props) => {
   const maskedNumber = `•••• •••• •••• ${number.slice(-4)}`;
 
+  const getColors = () => {
+    if (typeof color === 'string') {
+      return color;
+    } else {
+      return {
+        linearGradient: {
+          colors: color,
+          start: [0, 0],
+          end: [1, 0],
+        },
+      };
+    }
+  };
+
+  const renderBrand = () => {
+    if (brand === 'visa') {
+      return <VisaSVG width={50} height={30} />;
+    }
+    return <MastercardSVG width={40} height={30} />;
+  };
+
   return (
-    <AspectRatio borderRadius={8} ratio={16 / 10} width="full">
-      <VStack
-        py={4}
-        px={6}
-        borderRadius={12}
-        bg={{
-          linearGradient: {
-            colors: getColors(type),
-            start: [0, 0],
-            end: [1, 0],
-          },
-        }}
-      >
+    <AspectRatio borderRadius={8} ratio={16 / 10} width="full" shadow="6">
+      <VStack py={4} px={6} borderRadius={12} bg={getColors()}>
+        <HStack flex={1} justifyContent="space-between" alignItems="center">
+          {renderBrand()}
+          <Text
+            textTransform="capitalize"
+            color="white"
+            opacity={0.6}
+            fontWeight="bold"
+          >
+            {type}
+          </Text>
+        </HStack>
         <HStack flex={2} alignItems="center">
           <Heading color="white">{maskedNumber}</Heading>
         </HStack>

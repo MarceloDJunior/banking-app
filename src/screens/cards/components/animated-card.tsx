@@ -41,13 +41,6 @@ export const AnimatedCard = ({ scrollY, index, children }: Props) => {
       }
     );
     return {
-      shadowOpacity: 0.8,
-      shadowColor: '#000000',
-      shadowRadius: 3,
-      shadowOffset: {
-        width: 2,
-        height: 2,
-      },
       transform: [{ perspective: 1000 }, { translateY }, { scale }],
     };
   });
