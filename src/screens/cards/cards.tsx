@@ -46,7 +46,7 @@ export const Cards = () => {
         }}
         contentInset={{
           top: 0,
-          bottom: CARDS.length * 80,
+          bottom: CARDS.length * 100,
         }}
         scrollEventThrottle={16}
         showsVerticalScrollIndicator={false}
