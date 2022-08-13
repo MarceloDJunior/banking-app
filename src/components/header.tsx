@@ -50,12 +50,17 @@ export const Header = ({ title, rightHeader }: Props) => {
       left={0}
       right={0}
       style={headerAnimatedStyles}
-      bg={colors.white}
+      bg={colors.secondary[500]}
     >
       <HStack flex={1} justifyContent="flex-start">
         <MenuButton onPress={openDrawer} />
       </HStack>
-      <Heading fontSize="lg" flex={1} textAlign="center">
+      <Heading
+        fontSize="lg"
+        flex={1}
+        textAlign="center"
+        color={colors.text[500]}
+      >
         {title}
       </Heading>
       <HStack flex={1} justifyContent="flex-end">

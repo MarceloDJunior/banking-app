@@ -7,9 +7,7 @@ type StickyScrollContextType = {
   setIsStickyEnabled: (isStickyEnabled: boolean) => void;
 };
 
-const StickyScrollContext = createContext<StickyScrollContextType>(
-  {} as StickyScrollContextType
-);
+const StickyScrollContext = createContext({} as StickyScrollContextType);
 
 export const useStickyScrollContext = () => useContext(StickyScrollContext);
 

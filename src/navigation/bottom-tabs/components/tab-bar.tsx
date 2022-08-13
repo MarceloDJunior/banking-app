@@ -143,7 +143,7 @@ const styles = (colors: any) =>
       left: 0,
       right: 0,
       borderTopWidth: 0,
-      backgroundColor: colors.white,
+      backgroundColor: colors.secondary[500],
       elevation: 30,
       zIndex: 1,
       height: 60,

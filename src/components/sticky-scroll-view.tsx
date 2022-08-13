@@ -4,11 +4,12 @@ import {
   NativeScrollEvent,
   NativeSyntheticEvent,
 } from 'react-native';
-import { ScrollView } from 'native-base';
+import { ScrollView, useTheme } from 'native-base';
 
 import { useStickyScrollContext } from '../contexts/sticky-scroll-context';
 
 export const StickyScrollView: React.FC = ({ children }) => {
+  const { colors } = useTheme();
   const { isStickyEnabled, setIsScrollingDown, setIsStickyEnabled } =
     useStickyScrollContext();
   const [scrollHeight, setScrollHeight] = useState(0);
@@ -49,6 +50,7 @@ export const StickyScrollView: React.FC = ({ children }) => {
       onScrollEndDrag={onScroll}
       scrollEventThrottle={16}
       flex={1}
+      bg={colors.secondary[500]}
     >
       {children}
     </ScrollView>

@@ -33,7 +33,7 @@ export const TabNavigator = () => {
         tabBarShowLabel: false,
       })}
       sceneContainerStyle={{
-        backgroundColor: colors.white,
+        backgroundColor: colors.secondary[500],
         paddingBottom: isStickyEnabled ? bottom : 60 + bottom,
       }}
     >

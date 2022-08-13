@@ -20,7 +20,7 @@ export const Home = () => {
         alignItems="center"
         justifyContent="center"
         p={1}
-        icon={<NotificationIcon size={24} color={colors.gray[700]} />}
+        icon={<NotificationIcon size={24} color={colors.text[500]} />}
       />
     );
   };

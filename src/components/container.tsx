@@ -8,12 +8,19 @@ type Props = {
 };
 
 export const Container = ({ children }: Props) => {
-  const { colors } = useTheme();
+  const { colors, config } = useTheme();
   const drawerStatus = useDrawerStatus();
 
+  const getStatusBarTextColor = () => {
+    if (config.initialColorMode === 'dark') {
+      return 'light';
+    }
+    return drawerStatus === 'open' ? 'light' : 'dark';
+  };
+
   return (
-    <View bg={colors.white} flex={1}>
-      <StatusBar style={drawerStatus === 'open' ? 'light' : 'dark'} />
+    <View bg={colors.secondary[500]} flex={1}>
+      <StatusBar style={getStatusBarTextColor()} />
       <SafeAreaView style={{ flex: 1 }} edges={['top']}>
         <View bg="white" flex={1} overflow="hidden">
           {children}

@@ -1,5 +1,5 @@
 import { useLayoutEffect } from 'react';
-import { Box, useTheme } from 'native-base';
+import { Box } from 'native-base';
 import { useDrawerStatus } from '@react-navigation/drawer';
 import Animated, {
   useAnimatedStyle,
@@ -10,7 +10,6 @@ import Animated, {
 const AnimatedBox = Animated.createAnimatedComponent(Box);
 
 export const Drawer3dContainer: React.FC = ({ children }) => {
-  const { colors } = useTheme();
   const drawerStatus = useDrawerStatus();
 
   const borderRadius = useSharedValue(0);
@@ -68,7 +67,7 @@ export const Drawer3dContainer: React.FC = ({ children }) => {
 
   return (
     <AnimatedBox flex={1} style={animatedContainerStyle}>
-      <AnimatedBox flex={1} bg={colors.white} style={animatedChildStyle}>
+      <AnimatedBox flex={1} style={animatedChildStyle}>
         {children}
       </AnimatedBox>
     </AnimatedBox>

@@ -90,7 +90,7 @@ const ServiceItem = ({ icon, title }: ServiceItemType) => {
           })}
         </Box>
       </Button>
-      <Text fontSize="xs" fontWeight="medium" mt={2}>
+      <Text fontSize="xs" fontWeight="medium" mt={2} color={colors.text[500]}>
         {title}
       </Text>
     </VStack>

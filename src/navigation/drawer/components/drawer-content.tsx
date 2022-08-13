@@ -4,7 +4,7 @@ import {
   DrawerItemList,
   useDrawerStatus,
 } from '@react-navigation/drawer';
-import { Heading, Image, VStack } from 'native-base';
+import { Heading, HStack, Image, Switch, useTheme, VStack } from 'native-base';
 import { useLayoutEffect } from 'react';
 import Animated, {
   useAnimatedStyle,
@@ -12,11 +12,15 @@ import Animated, {
   withTiming,
 } from 'react-native-reanimated';
 
+import { useAppContext } from '../../../contexts/app-context';
+
 const AnimatedDrawerContentScrollView = Animated.createAnimatedComponent(
   DrawerContentScrollView
 );
 
 export const DrawerContent = (props: DrawerContentComponentProps) => {
+  const { theme, setTheme } = useAppContext();
+  const { colors } = useTheme();
   const drawerStatus = useDrawerStatus();
   const rotate = useSharedValue('25deg');
   const marginVertical = useSharedValue(0);
@@ -65,6 +69,17 @@ export const DrawerContent = (props: DrawerContentComponentProps) => {
         </Heading>
       </VStack>
       <DrawerItemList {...props} />
+      <HStack alignItems="center" p={3} mt={8}>
+        <Heading fontSize="sm" color="white" mr={4}>
+          Dark Mode
+        </Heading>
+        <Switch
+          isChecked={theme === 'dark'}
+          onToggle={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
+          offTrackColor={colors.gray[300]}
+          onTrackColor={colors.primary[500]}
+        />
+      </HStack>
     </AnimatedDrawerContentScrollView>
   );
 };

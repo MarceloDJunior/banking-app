@@ -49,7 +49,12 @@ export const TransactionItem = ({ transaction }: Props) => {
       </Box>
       <VStack>
         <HStack>
-          <Text fontSize="md" textTransform="capitalize" fontWeight="bold">
+          <Text
+            fontSize="md"
+            textTransform="capitalize"
+            fontWeight="bold"
+            color={colors.text[500]}
+          >
             {transaction.title}
           </Text>
         </HStack>
@@ -57,7 +62,13 @@ export const TransactionItem = ({ transaction }: Props) => {
           {transaction.date.toLocaleString('en-US')}
         </Text>
       </VStack>
-      <Text fontSize="md" fontWeight="bold" flex={1} textAlign="right">
+      <Text
+        fontSize="md"
+        fontWeight="bold"
+        flex={1}
+        textAlign="right"
+        color={colors.text[500]}
+      >
         {transaction.type === 'receive' ? '+' : '-'}
         {transaction.amount.toFixed(2)}
       </Text>

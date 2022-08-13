@@ -1,4 +1,4 @@
-import { Button, Heading, HStack, VStack } from 'native-base';
+import { Button, Heading, HStack, useTheme, VStack } from 'native-base';
 
 import { TransactionModel } from '../../../models/transaction-model';
 
@@ -40,13 +40,20 @@ const TRANSACTIONS: TransactionModel[] = [
 ];
 
 export const TransactionHistory = () => {
+  const { colors } = useTheme();
   return (
     <VStack px={4} py={6}>
-      <HStack alignItems="center" justifyContent="space-between" mb={3}>
-        <Heading fontSize="md">Recent transactions</Heading>
+      <HStack alignItems="center" justifyContent="space-between" mb={4} mt={1}>
+        <Heading fontSize="lg" color={colors.text[500]}>
+          Recent transactions
+        </Heading>
         <Button
           variant="ghost"
-          _text={{ fontWeight: 'bold', fontSize: 'xs' }}
+          _text={{
+            fontWeight: 'bold',
+            fontSize: 'xs',
+            color: colors.primary[500],
+          }}
           _pressed={{
             bg: 'transparent',
             opacity: 0.7,

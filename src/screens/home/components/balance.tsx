@@ -1,6 +1,7 @@
-import { HStack, VStack, Text } from 'native-base';
+import { HStack, VStack, Text, useTheme } from 'native-base';
 
 export const Balance = () => {
+  const { colors } = useTheme();
   return (
     <HStack
       px={4}
@@ -10,11 +11,11 @@ export const Balance = () => {
       justifyContent="flex-start"
     >
       <VStack>
-        <Text fontSize="xs" fontWeight="bold">
+        <Text fontSize="xs" fontWeight="bold" color={colors.text[500]}>
           Total balance
         </Text>
         <HStack>
-          <Text fontSize="3xl" fontWeight="bold">
+          <Text fontSize="3xl" fontWeight="bold" color={colors.text[500]}>
             $2,340.00
           </Text>
         </HStack>

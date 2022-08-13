@@ -27,7 +27,7 @@ export const Cards = () => {
         alignItems="center"
         justifyContent="center"
         p={1}
-        icon={<PlusCircle size={28} color={colors.gray[700]} />}
+        icon={<PlusCircle size={28} color={colors.text[500]} />}
       />
     );
   };
@@ -36,17 +36,21 @@ export const Cards = () => {
     <Container>
       <Header title="My cards" rightHeader={renderAddCardButton()} />
       <Animated.FlatList
+        style={{
+          backgroundColor: colors.secondary[500],
+          flex: 1,
+        }}
         contentContainerStyle={{
           paddingTop: 80,
+          backgroundColor: colors.secondary[500],
         }}
         contentInset={{
           top: 0,
-          bottom: CARDS.length * 60,
+          bottom: CARDS.length * 80,
         }}
         scrollEventThrottle={16}
         showsVerticalScrollIndicator={false}
         bounces={false}
-        style={{ flex: 1 }}
         data={CARDS}
         keyExtractor={item => item.id.toString()}
         renderItem={({ index, item }) => (
