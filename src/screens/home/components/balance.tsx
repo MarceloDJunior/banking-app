@@ -2,6 +2,7 @@ import { HStack, VStack, Text, useTheme } from 'native-base';
 
 export const Balance = () => {
   const { colors } = useTheme();
+
   return (
     <HStack
       px={4}

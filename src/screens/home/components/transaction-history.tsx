@@ -41,6 +41,7 @@ const TRANSACTIONS: TransactionModel[] = [
 
 export const TransactionHistory = () => {
   const { colors } = useTheme();
+
   return (
     <VStack px={4} py={6}>
       <HStack alignItems="center" justifyContent="space-between" mb={4} mt={1}>
