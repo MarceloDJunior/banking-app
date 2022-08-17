@@ -20,7 +20,7 @@ export const CardList = () => {
       }}
       renderItem={({ item }) => (
         <Box mb={6} px={2} style={{ width: width * 0.85 }}>
-          <Card type={item.id} {...item} />
+          <Card {...item} />
         </Box>
       )}
     />
