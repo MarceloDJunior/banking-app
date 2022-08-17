@@ -1,4 +1,5 @@
 import { Box, HStack, Text, useTheme, VStack, Image } from 'native-base';
+import { useCallback } from 'react';
 
 import AmazonIcon from '../../../assets/images/amazon.jpeg';
 import NetflixIcon from '../../../assets/images/netflix.jpeg';
@@ -13,7 +14,7 @@ type Props = {
 export const TransactionItem = ({ transaction }: Props) => {
   const { colors } = useTheme();
 
-  const renderIcon = () => {
+  const renderIcon = useCallback(() => {
     const props = {
       alt: transaction.icon,
       width: '100%',
@@ -32,7 +33,7 @@ export const TransactionItem = ({ transaction }: Props) => {
       default:
         return null;
     }
-  };
+  }, [transaction.icon]);
 
   return (
     <HStack alignItems="center" py={3}>
