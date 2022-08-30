@@ -18,6 +18,8 @@ The app was built with React Native using Expo Bare Workflow.
 
 ## Video
 
+https://user-images.githubusercontent.com/17832776/187319368-48451201-a8a5-467c-a9ba-fa8d0fb74a9f.mp4
+
 
 ## Installation
 
