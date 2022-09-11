@@ -1,11 +1,11 @@
 import { Box, HStack, Text, useTheme, VStack, Image } from 'native-base';
 import { useCallback } from 'react';
 
-import AmazonIcon from '../../../assets/images/amazon.jpeg';
-import NetflixIcon from '../../../assets/images/netflix.jpeg';
-import SpotifyIcon from '../../../assets/images/spotify.jpeg';
-import UberIcon from '../../../assets/images/uber.jpeg';
-import { TransactionModel } from '../../../models/transaction-model';
+import AmazonIcon from '../assets/images/amazon.jpeg';
+import NetflixIcon from '../assets/images/netflix.jpeg';
+import SpotifyIcon from '../assets/images/spotify.jpeg';
+import UberIcon from '../assets/images/uber.jpeg';
+import { TransactionModel } from '../models/transaction-model';
 
 type Props = {
   transaction: TransactionModel;

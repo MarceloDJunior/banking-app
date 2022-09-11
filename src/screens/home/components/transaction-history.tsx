@@ -1,8 +1,13 @@
+import { useNavigation } from '@react-navigation/native';
+import { StackNavigationProp } from '@react-navigation/stack';
 import { Button, Heading, HStack, useTheme, VStack } from 'native-base';
 
 import { TransactionModel } from '../../../models/transaction-model';
-
-import { TransactionItem } from './transaction-item';
+import {
+  StackRoutes,
+  StackParamList,
+} from '../../../navigation/routes/stack-routes';
+import { TransactionItem } from '../../../components/transaction-item';
 
 const TRANSACTIONS: TransactionModel[] = [
   {
@@ -41,6 +46,7 @@ const TRANSACTIONS: TransactionModel[] = [
 
 export const TransactionHistory = () => {
   const { colors } = useTheme();
+  const navigation = useNavigation<StackNavigationProp<StackParamList>>();
 
   return (
     <VStack px={4} py={6}>
@@ -60,6 +66,7 @@ export const TransactionHistory = () => {
             opacity: 0.7,
           }}
           p={0}
+          onPress={() => navigation.navigate(StackRoutes.Transactions)}
         >
           Show all
         </Button>

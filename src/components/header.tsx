@@ -1,9 +1,10 @@
 import { DrawerActions, useNavigation } from '@react-navigation/native';
-import { Heading, HStack, useTheme } from 'native-base';
+import { Heading, HStack, IconButton, useTheme } from 'native-base';
 import Animated, {
   useAnimatedStyle,
   withTiming,
 } from 'react-native-reanimated';
+import { CaretLeft as BackIcon } from 'phosphor-react-native';
 
 import { useStickyScrollContext } from '../contexts/sticky-scroll-context';
 
@@ -14,15 +15,29 @@ const AnimatedHStack = Animated.createAnimatedComponent(HStack);
 type Props = {
   title: string;
   rightHeader?: React.ReactNode;
+  backButton?: boolean;
 };
 
-export const Header = ({ title, rightHeader }: Props) => {
+export const Header = ({ title, backButton, rightHeader }: Props) => {
   const { colors } = useTheme();
   const navigation = useNavigation();
   const { isScrollingDown } = useStickyScrollContext();
 
   const openDrawer = () => {
     navigation.dispatch(DrawerActions.openDrawer());
+  };
+
+  const renderBackButton = () => {
+    return (
+      <IconButton
+        variant="ghost"
+        alignItems="center"
+        justifyContent="center"
+        p={1}
+        icon={<BackIcon size={24} color={colors.text[500]} />}
+        onPress={() => navigation.goBack()}
+      />
+    );
   };
 
   const headerAnimatedStyles = useAnimatedStyle(() => {
@@ -41,7 +56,7 @@ export const Header = ({ title, rightHeader }: Props) => {
 
   return (
     <AnimatedHStack
-      px={4}
+      px={2}
       py={3}
       justifyContent="space-between"
       alignItems="center"
@@ -53,7 +68,7 @@ export const Header = ({ title, rightHeader }: Props) => {
       bg={colors.secondary[500]}
     >
       <HStack flex={1} justifyContent="flex-start">
-        <MenuButton onPress={openDrawer} />
+        {backButton ? renderBackButton() : <MenuButton onPress={openDrawer} />}
       </HStack>
       <Heading
         fontSize="lg"

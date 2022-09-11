@@ -6,6 +6,8 @@ import {
   IconWeight,
 } from 'phosphor-react-native';
 
+import { BottomTabsRoutes } from '../../routes/bottom-tabs-routes';
+
 type Props = {
   isCurrent: boolean;
   label: string;
@@ -25,11 +27,11 @@ export const BottomTabItem = ({ isCurrent, label, route }: Props) => {
     };
 
     switch (route) {
-      case 'Cards':
+      case BottomTabsRoutes.Cards:
         return <CardIcon {...props} />;
-      case 'Home':
+      case BottomTabsRoutes.Home:
         return <HouseIcon {...props} />;
-      case 'Settings':
+      case BottomTabsRoutes.Settings:
         return <SettingsIcon {...props} />;
       default:
         return null;

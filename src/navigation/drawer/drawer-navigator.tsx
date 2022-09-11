@@ -13,6 +13,8 @@ import {
 import { ParamListBase, RouteProp } from '@react-navigation/native';
 
 import { TabNavigator } from '../bottom-tabs/bottom-tabs-navigator';
+import { DrawerRoutes } from '../routes/drawer-routes';
+import { StackNavigator } from '../stack/stack-navigator';
 
 import { DrawerContent } from './components/drawer-content';
 import { Drawer3dContainer } from './components/drawer-3d-container';
@@ -42,11 +44,11 @@ export const DrawerNavigator = () => {
     };
 
     switch (route) {
-      case 'HomeTabs':
+      case DrawerRoutes.HomeStack:
         return <HouseIcon color={colors.white} {...props} />;
-      case 'CardsTabs':
+      case DrawerRoutes.CardsTabs:
         return <CardIcon color={colors.white} {...props} />;
-      case 'SettingsTabs':
+      case DrawerRoutes.SettingsTabs:
         return <SettingsIcon color={colors.white} {...props} />;
       default:
         return null;
@@ -85,13 +87,18 @@ export const DrawerNavigator = () => {
         swipeEnabled: false,
       })}
     >
-      <Drawer.Screen name="HomeTabs" options={{ title: 'Home' }}>
+      <Drawer.Screen
+        name={DrawerRoutes.HomeStack}
+        options={{ title: 'Home' }}
+        component={StackNavigator}
+      />
+      <Drawer.Screen name={DrawerRoutes.CardsTabs} options={{ title: 'Cards' }}>
         {renderScreen}
       </Drawer.Screen>
-      <Drawer.Screen name="CardsTabs" options={{ title: 'Cards' }}>
-        {renderScreen}
-      </Drawer.Screen>
-      <Drawer.Screen name="SettingsTabs" options={{ title: 'Settings' }}>
+      <Drawer.Screen
+        name={DrawerRoutes.SettingsTabs}
+        options={{ title: 'Settings' }}
+      >
         {renderScreen}
       </Drawer.Screen>
     </Drawer.Navigator>

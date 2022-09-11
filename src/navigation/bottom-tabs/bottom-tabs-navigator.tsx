@@ -9,6 +9,7 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { useStickyScrollContext } from '../../contexts/sticky-scroll-context';
 import { Cards } from '../../screens/cards';
 import { Home } from '../../screens/home';
+import { BottomTabsRoutes } from '../routes/bottom-tabs-routes';
 
 import { TabBar } from './components/tab-bar';
 
@@ -26,7 +27,7 @@ export const TabNavigator = () => {
 
   return (
     <Tab.Navigator
-      initialRouteName="Home"
+      initialRouteName={BottomTabsRoutes.Home}
       tabBar={renderTabBar}
       screenOptions={() => ({
         headerShown: false,
@@ -37,9 +38,13 @@ export const TabNavigator = () => {
         paddingBottom: isStickyEnabled ? bottom : 60 + bottom,
       }}
     >
-      <Tab.Screen name="Cards" component={Cards} />
-      <Tab.Screen name="Home" component={Home} />
-      <Tab.Screen name="Settings" component={Home} />
+      <Tab.Screen name={BottomTabsRoutes.Cards} component={Cards} />
+      <Tab.Screen
+        name={BottomTabsRoutes.Home}
+        component={Home}
+        options={{ title: 'Home' }}
+      />
+      <Tab.Screen name={BottomTabsRoutes.Settings} component={Home} />
     </Tab.Navigator>
   );
 };

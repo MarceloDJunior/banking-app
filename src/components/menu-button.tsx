@@ -11,7 +11,7 @@ export const MenuButton = ({ onPress }: Props) => {
   return (
     <Button
       bg={colors.secondary[500]}
-      p={0}
+      p={2}
       _pressed={{ bg: colors.secondary[500] }}
       onPress={onPress}
     >
