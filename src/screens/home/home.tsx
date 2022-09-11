@@ -1,9 +1,9 @@
-import { IconButton, useTheme } from 'native-base';
+import { IconButton, useTheme, ScrollView } from 'native-base';
 import { Bell as NotificationIcon } from 'phosphor-react-native';
 
 import { Container } from '../../components/container';
-import { StickyScrollView } from '../../components/sticky-scroll-view';
 import { Header } from '../../components/header';
+import { useStickyScrollEvents } from '../../hooks/use-sticky-scroll-events';
 
 import { Balance } from './components/balance';
 import { CardList } from './components/card-list';
@@ -12,6 +12,7 @@ import { TransactionHistory } from './components/transaction-history';
 
 export const Home = () => {
   const { colors } = useTheme();
+  const { onScroll, onScrollViewLayout } = useStickyScrollEvents();
 
   const renderNotificationsButton = () => {
     return (
@@ -28,12 +29,21 @@ export const Home = () => {
   return (
     <Container>
       <Header title="Home" rightHeader={renderNotificationsButton()} />
-      <StickyScrollView>
+      <ScrollView
+        contentContainerStyle={{ paddingTop: 56 }}
+        showsVerticalScrollIndicator={false}
+        onLayout={onScrollViewLayout}
+        onScrollBeginDrag={onScroll}
+        onScrollEndDrag={onScroll}
+        scrollEventThrottle={16}
+        flex={1}
+        bg={colors.secondary[500]}
+      >
         <Balance />
         <CardList />
         <ServicesGrid />
         <TransactionHistory />
-      </StickyScrollView>
+      </ScrollView>
     </Container>
   );
 };
