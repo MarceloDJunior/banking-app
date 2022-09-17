@@ -137,7 +137,7 @@ const AnimatedSectionList =
 export const Transactions = () => {
   const { colors } = useTheme();
   const { isScrollingDown } = useStickyScrollContext();
-  const topPosition = useSharedValue(56);
+  const topPosition = useSharedValue(54);
 
   const { onScrollViewLayout, onScroll } = useStickyScrollEvents();
 
