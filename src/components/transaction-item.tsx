@@ -70,7 +70,7 @@ export const TransactionItem = ({ transaction }: Props) => {
         textAlign="right"
         color={colors.text[500]}
       >
-        {transaction.type === 'receive' ? '+' : '-'}
+        {transaction.type === 'receive' ? '+' : '-'}$
         {transaction.amount.toFixed(2)}
       </Text>
     </HStack>
